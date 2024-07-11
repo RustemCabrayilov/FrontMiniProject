@@ -1,18 +1,3 @@
-
-#notFound {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  & p {
-    font-size: 40px;
-    font-weight: bolder;
-    color: black;
-  }
-  & svg {
-    width: 10%;
-    height: 20%;
-  }
-}
 .spinnerContainer {
   display: none;
   flex-direction: column;

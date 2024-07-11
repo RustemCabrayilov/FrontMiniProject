@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: poppins;
 }
 header {
   display: flex;
@@ -9,7 +10,7 @@ header {
   align-items: center;
   min-height: 18vh;
   padding: 15px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.311);
   & .user-part {
     display: flex;
     align-items: center;
@@ -19,16 +20,17 @@ header {
       border-radius: 50%;
       margin-right: 30px;
       & a img {
-        width: 100px;
+        width: 100%;
         height: 100%;
-        border: 1px solid gray;
+        border: 3px solid rgba(128, 128, 128, 0.392);
         border-radius: 50%;
         cursor: pointer;
       }
     }
-    & .user-basket{
+    & .user-basket {
       position: relative;
-      .basket-counter{
+      cursor: pointer;
+      .basket-counter {
         width: 22px;
         height: 22px;
         border-radius: 50%;
@@ -39,12 +41,13 @@ header {
         position: absolute;
         top: -5px;
         right: -1px;
-        }
-     & i {
-      font-size: 40px;
-      cursor: pointer;
-      color: orange;
-    }}
+        cursor: pointer;
+      }
+      & i {
+        font-size: 40px;
+        color: orange;
+      }
+    }
   }
   & .page-logo {
     width: 150px;
@@ -57,10 +60,15 @@ header {
     }
   }
 }
-.custom-container2{
-width: 100%;
-height: 450px;
-margin: 20px 0;
+ .user-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  & img {
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgba(128, 128, 128, 0.392);
+    border-radius: 50%;
+    cursor: pointer;
+  }
 }
-
-

@@ -1,19 +1,16 @@
-// let InputEmail=document.querySelector("#exampleInputUser1")
-// let exampleInputEmail2=document.querySelector("#exampleInputEmail2")
-
 let logInform = document.querySelector("#logIn-form");
+let logIn = document.querySelector(".log-in");
 logInform.addEventListener("submit", (event) => {
   event.preventDefault();
   let userName = event.target[0].value;
   let password = event.target[1].value;
   checkData(userName, password);
 });
+
 function checkData(userName, password) {
   let loading = document.querySelector(".spinnerContainer");
-  let notFound = document.querySelector("#notFound");
   loading.style.display = "flex";
-  notFound.style.display = "none";
-  logInform.style.display = "none";
+  logIn.style.display = "none";
   fetch("https://dummyjson.com/users")
     .then((res) => res.json())
     .then((data) => {
@@ -22,15 +19,10 @@ function checkData(userName, password) {
         (user) => user.username == userName && user.password == password
       );
       if (findUser) {
-        loading.style.display = "none";
-        notFound.style.display = "none";
-        logInform.style.display = "flex";
         window.location.href = "products.html";
         setCookie("id", findUser.id, 9);
       } else {
-        loading.style.display = "none";
-        notFound.style.display = "flex";
-        logInform.style.display = "none";
+        logIn.style.display = "flex";
       }
     });
 }

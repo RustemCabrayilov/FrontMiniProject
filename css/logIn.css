@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: poppins;
+}
+.logIn-container {
+  & .log-in {
+    height: 100vh;
+    & .logIn-left {
+      height: 100vh;
+      background-image: url(../images/vibrant-orange-3d-render-of-shopping-concept-smartphone-checkout-and-cardboard-box-delivery-on-background_9799604.jpg!bw700);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    & .logIn-right {
+      height: 100vh;
+      border: 1px solid;
+      margin-left: -20px;
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      & h2 {
+        margin-bottom: 40px;
+      }
+      & #logIn-form {
+        width: 60vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        & .btn {
+          width: 250px;
+        }
+        & div {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

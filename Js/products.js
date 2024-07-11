@@ -10,6 +10,8 @@ window.addEventListener("load", () => {
   let productList = document.querySelector(".product-list");
   let userLogo = document.querySelector(".user-logo>a>img");
   let loading = document.querySelector(".spinnerContainer");
+
+  
   loading.style.display = "flex";
   fetch("https://dummyjson.com/products")
     .then((res) => res.json())
@@ -22,7 +24,6 @@ window.addEventListener("load", () => {
   <img src="${product.thumbnail}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">${product.title}</h5>
-    <p class="card-text">${product.description}</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><i class="fa-solid fa-dollar-sign ms-1"></i><span class="ms-2">${product.price}</span></li>
@@ -30,26 +31,42 @@ window.addEventListener("load", () => {
     <li class="list-group-item"><i class="fa-solid fa-star"></i><span class="ms-2">${product.rating}</span></li>
   </ul>
   <div class="card-body">
-    <button href="#" class="btn btn-warning me-2" style="
-      background-color: rgb(255, 166, 0);
-      color: white;
-      font-size: 17px;
+    <button href="#" class="btn btn-warning me-2 text-light" style="
+      font-size: 15px;
       font-weight: bold;" onclick="handleClick(${product.id})">Add to basket</button>
-    <button href="#" class="btn btn-info font-weight-bolder text-light" onclick="handleDetail(${product.id})">Details</button>
+    <button href="#" class="btn btn-info  text-light" style="font-weight:bold" onclick="handleDetail(${product.id})">Details</button>
   </div>
 </div>
 `;
       });
     });
+  
   fetch("https://dummyjson.com/users")
     .then((res) => res.json())
     .then((data) => {
+      let userPhoto=document.querySelector(".user-photo>img")
+      let userName=document.querySelector(".userName>p")
+      let fullName=document.querySelector(".fullName>p")
+      let emailPhone=document.querySelector(".email-phone")
+      let heightWeight=document.querySelector(".height-weight")
       let users = data.users;
       let userId = getCookie("id");
-      console.log(userId);
       let currentUser = users.find((user) => userId == user.id);
+      console.log(currentUser);
       userLogo.src = currentUser.image;
+      
+        // setCookie("userId",currentUser.id)
+       
+      userPhoto.src=currentUser.image
+      fullName.innerHTML=`${currentUser.firstName} ${currentUser.maidenName} ${currentUser.lastName}`
+      userName.innerHTML+=`${currentUser.username}`
+      emailPhone.firstElementChild.innerHTML+=`${currentUser.email}`
+      emailPhone.lastElementChild.innerHTML+=`${currentUser.phone}`
+      heightWeight.firstElementChild.innerHTML+=`${currentUser.height}cm`
+      heightWeight.lastElementChild.innerHTML+=`${currentUser.weight}kg`
+      
     });
+
 });
 
 function getCookie(cname) {
@@ -66,6 +83,13 @@ function getCookie(cname) {
   }
   return "";
 }
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
 function handleClick(id) {
   productIds.push(id);
   let user = getCookie("id");
