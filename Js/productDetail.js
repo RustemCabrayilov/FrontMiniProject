@@ -19,11 +19,16 @@ window.addEventListener("load", () => {
       desc.innerHTML = findProduct.description;
       qrCode.src = findProduct.meta.qrCode;
       price.innerHTML = `<i class="fa-solid fa-dollar-sign ms-1"></i><span class="ms-2">${findProduct.price}</span>`;
-      for (let index = 0; index < slideImages.length; index++) {
-        slideImages[index].src = findProduct.images;
-      }
-      products.forEach((product) => {
      
+      for (let index = 0; index < slideImages.length; index++) {
+        slideImages[index].src = findProduct.images[index];
+      }
+      // findProduct.images.forEach((image, index) => {
+      //   if (index <slideImages.length) {
+      //     slideImages[index].src = image;
+      //   }
+      // });
+      products.forEach((product) => {    
           if (
            product.category==findProduct.category
           ) {
@@ -50,21 +55,17 @@ window.addEventListener("load", () => {
               </div>
               `;
             }
-          }
-        
+          }      
       });
+      let shoppingCart=document.querySelector(".shopping-cart")
+      shoppingCart.addEventListener("click",()=>{
+        window.location.href="../html/basketProduct.html"
+        handleClick(findProduct.id)
+      })
     });
-    let shoppingCart=document.querySelector(".shopping-cart")
-    shoppingCart.addEventListener("click",()=>{
-      window.location.href="../html/basketProduct.html"
-    })
+   
 });
-function setCookie(cname, cvalue, exdays) {
-  const d = new Date();
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-  let expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
+
  
 
 function getStars(rating){

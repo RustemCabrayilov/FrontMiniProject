@@ -48,6 +48,13 @@ header {
         color: orange;
       }
     }
+    & .log-out{
+      & a{
+        text-decoration: none;
+        margin-left: 20px;
+        color: #ffc107;
+      }
+    }
   }
   & .page-logo {
     width: 150px;

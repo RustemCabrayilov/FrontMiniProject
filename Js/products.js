@@ -1,4 +1,3 @@
-let productIds = JSON.parse(localStorage.getItem(getCookie("id"))) || [];
 let basketCounter = document.querySelector(".basket-counter");
 basketCounter.innerHTML = localStorage.getItem(
   getCookie("id") + "_" + "counter"
@@ -10,8 +9,6 @@ window.addEventListener("load", () => {
   let productList = document.querySelector(".product-list");
   let userLogo = document.querySelector(".user-logo>a>img");
   let loading = document.querySelector(".spinnerContainer");
-
-  
   loading.style.display = "flex";
   fetch("https://dummyjson.com/products")
     .then((res) => res.json())
@@ -66,48 +63,52 @@ window.addEventListener("load", () => {
       heightWeight.lastElementChild.innerHTML+=`${currentUser.weight}kg`
       
     });
+let logOut=document.querySelector(".log-out>a")
+logOut.addEventListener("click",()=>{
 
+    document.cookie = "id" +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+})
 });
 
-function getCookie(cname) {
-  let name = cname + "=";
-  let ca = document.cookie.split(";");
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == " ") {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-function setCookie(cname, cvalue, exdays) {
-  const d = new Date();
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-  let expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
+// function getCookie(cname) {
+//   let name = cname + "=";
+//   let ca = document.cookie.split(";");
+//   for (let i = 0; i < ca.length; i++) {
+//     let c = ca[i];
+//     while (c.charAt(0) == " ") {
+//       c = c.substring(1);
+//     }
+//     if (c.indexOf(name) == 0) {
+//       return c.substring(name.length, c.length);
+//     }
+//   }
+//   return "";
+// }
+// function setCookie(cname, cvalue, exdays) {
+//   const d = new Date();
+//   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+//   let expires = "expires=" + d.toUTCString();
+//   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+// }
 
-function handleClick(id) {
-  productIds.push(id);
-  let user = getCookie("id");
-  let counter = localStorage.getItem(user + "_" + "counter") || 0;
-  localStorage.setItem(user, JSON.stringify(productIds));
-  counter++;
-  localStorage.setItem(user + "_" + "counter", counter);
-  basketCounter.innerHTML = localStorage.getItem(user + "_" + "counter");
-  if (basketCounter.innerHTML != "") {
-    basketCounter.classList.add("basket-counter");
-  }
-}
+// function handleClick(id) {
+//   productIds.push(id);
+//   let user = getCookie("id");
+//   let counter = localStorage.getItem(user + "_" + "counter") || 0;
+//   localStorage.setItem(user, JSON.stringify(productIds));
+//   counter++;
+//   localStorage.setItem(user + "_" + "counter", counter);
+//   basketCounter.innerHTML = localStorage.getItem(user + "_" + "counter");
+//   if (basketCounter.innerHTML != "") {
+//     basketCounter.classList.add("basket-counter");
+//   }
+// }
 
 let basketIcon = document.querySelector(".user-basket");
 basketIcon.addEventListener("click", () => {
   window.location.href = "basketProduct.html";
 });
-function handleDetail(id) {
-  localStorage.setItem("productDetail", id);
-  window.location.href = "productDetail.html";
-}
+// function handleDetail(id) {
+//   localStorage.setItem("productDetail", id);
+//   window.location.href = "productDetail.html";
+// }
