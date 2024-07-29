@@ -1,12 +1,13 @@
 let productIds = JSON.parse(localStorage.getItem(getCookie("id"))) || [];
 function handleClick(id) {
   productIds.push(id);
-  let user = getCookie("id");
-  let counter = localStorage.getItem(user + "_" + "counter") || 0;
-  localStorage.setItem(user, JSON.stringify(productIds));
+  let userId = getCookie("id");
+  let counter = localStorage.getItem(userId + "_" + "counter") || 0;
+  localStorage.setItem(userId, JSON.stringify(productIds));
   counter++;
-  localStorage.setItem(user + "_" + "counter", counter);
-  basketCounter.innerHTML = localStorage.getItem(user + "_" + "counter");
+  localStorage.setItem(userId + "_" + "counter", counter);
+  toastTrigger()
+  basketCounter.innerHTML = localStorage.getItem(userId + "_" + "counter");
   if (basketCounter.innerHTML != "") {
     basketCounter.classList.add("basket-counter");
   }
@@ -35,4 +36,11 @@ function setCookie(cname, cvalue, exdays) {
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
   let expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function toastTrigger(){
+ 
+    var toastEl = document.getElementById('liveToast');
+    var toast = new bootstrap.Toast(toastEl, { delay: 1500 });
+    toast.show();
+
 }

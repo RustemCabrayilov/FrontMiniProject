@@ -5,7 +5,11 @@ window.addEventListener("load", () => {
   let price = document.querySelector(".product-details>h3");
   let desc = document.querySelector(".product-details>p");
   let qrCode = document.querySelector(".product-details>.qr-code>img");
-  let slideImages = document.querySelectorAll(".swiper-slide>img");
+  let slideImages = document.querySelectorAll(".mySwiper2>.swiper-wrapper>.swiper-slide>img");
+
+  let subimages = document.querySelectorAll(
+    ".mySwiper>.swiper-wrapper>.swiper-slide>img"
+  );
   let relatedProducts = document.querySelector(".related-products");
   fetch("https://dummyjson.com/products")
     .then((res) => res.json())
@@ -13,27 +17,25 @@ window.addEventListener("load", () => {
       let productId = localStorage.getItem("productDetail");
       const products = data.products;
       let findProduct = products.find((product) => product.id == productId);
-      brand.innerHTML = findProduct.brand==undefined?"No Brand":findProduct.brand;
+      brand.innerHTML =
+        findProduct.brand == undefined ? "No Brand" : findProduct.brand;
       title.innerHTML = findProduct.title;
-      rating.innerHTML =`<span class="rating">${findProduct.rating}</span> ${getStars(findProduct.rating)}`;
+      rating.innerHTML = `<span class="rating">${
+        findProduct.rating
+      }</span> ${getStars(findProduct.rating)}`;
       desc.innerHTML = findProduct.description;
       qrCode.src = findProduct.meta.qrCode;
       price.innerHTML = `<i class="fa-solid fa-dollar-sign ms-1"></i><span class="ms-2">${findProduct.price}</span>`;
-     
+
       for (let index = 0; index < slideImages.length; index++) {
-        slideImages[index].src = findProduct.images[index];
+        slideImages[index].src = findProduct.images[index % findProduct.images.length];
+        subimages[index].src = findProduct.images[index % findProduct.images.length];
       }
-      // findProduct.images.forEach((image, index) => {
-      //   if (index <slideImages.length) {
-      //     slideImages[index].src = image;
-      //   }
-      // });
-      products.forEach((product) => {    
-          if (
-           product.category==findProduct.category
-          ) {
-            if (product != findProduct) {
-              relatedProducts.innerHTML += `
+  
+      products.forEach((product) => {
+        if (product.category == findProduct.category) {
+          if (product != findProduct) {
+            relatedProducts.innerHTML += `
               <div class="card" style="width: 18rem;">
                 <img src="${product.thumbnail}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -54,30 +56,26 @@ window.addEventListener("load", () => {
                 </div>
               </div>
               `;
-            }
-          }      
+          }
+        }
       });
-      let shoppingCart=document.querySelector(".shopping-cart")
-      shoppingCart.addEventListener("click",()=>{
-        window.location.href="../html/basketProduct.html"
-        handleClick(findProduct.id)
-      })
+      let shoppingCart = document.querySelector(".shopping-cart");
+      shoppingCart.addEventListener("click", () => {
+        handleClick(findProduct.id);
+      });
     });
-   
 });
 
- 
-
-function getStars(rating){
-  let stars=""
-  const fullStars=Math.floor(rating)
-const halfStars=rating%1>=0.5
-for (let index = 0; index < fullStars; index++) {
-  stars+=`
-  <i class="fa-solid fa-star text-warning"></i>`
-}
-if(halfStars){
+function getStars(rating) {
+  let stars = "";
+  const fullStars = Math.floor(rating);
+  const halfStars = rating % 1 >= 0.5;
+  for (let index = 0; index < fullStars; index++) {
+    stars += `
+  <i class="fa-solid fa-star text-warning"></i>`;
+  }
+  if (halfStars) {
     stars += `<i class="fa-solid fa-star-half-alt text-warning ms-1"></i>`;
-}
-return stars
+  }
+  return stars;
 }

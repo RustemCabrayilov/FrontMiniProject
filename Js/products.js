@@ -30,7 +30,7 @@ window.addEventListener("load", () => {
   <div class="card-body">
     <button href="#" class="btn btn-warning me-2 text-light" style="
       font-size: 15px;
-      font-weight: bold;" onclick="handleClick(${product.id})">Add to basket</button>
+      font-weight: bold;"  onclick="handleClick(${product.id})">Add to basket</button>
     <button href="#" class="btn btn-info  text-light" style="font-weight:bold" onclick="handleDetail(${product.id})">Details</button>
   </div>
 </div>

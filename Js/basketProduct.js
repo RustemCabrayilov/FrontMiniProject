@@ -27,10 +27,7 @@ window.addEventListener("load", () => {
           <li class="list-group-item"><i class="fa-solid fa-star"></i><span class="ms-2">${product.rating}</span></li>
         </ul>
         <div class="card-body">
-          <button href="#" class="btn btn-warning me-2 text-light" style="
-      font-size: 15px;
-      font-weight: bold;" onclick="handleClick(${product.id})">Add to basket</button>
-    <button href="#" class="btn btn-info  text-light" style="font-weight:bold;" onclick="handleDetail(${product.id})">Details</button>
+    <button href="#" class="btn btn-info w-100 text-light" style="font-weight:bold;" onclick="handleDetail(${product.id})">Details</button>
         </div>
       </div>          
       `;
